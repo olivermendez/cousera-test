@@ -34,3 +34,27 @@ function makeTransactions(priceOfSale){
 console.log("Your actual bank balance is: "+ bankBalance);
 makeTransactions(79.00);
 makeTransactions(1022);
+
+
+//Another ways to create a functions is
+
+
+var transactions = function(priceOfSale){
+    if(priceOfSale <= bankBalance){
+        bankBalance -=priceOfSale;
+        console.log("Purchase successful!");
+        console.log("Before, your actual balance is: "+ bankBalance);
+    }else{
+        console.log("Insufficient Funds :(");
+    }
+}
+
+transactions(900);
+
+
+var printCustomerName = function(firts, last){
+    console.log("Firts name is: "+ firts + " Last name is: "+ last);
+}
+
+printCustomerName("Oliver", "Mendez");
+3
