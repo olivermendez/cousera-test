@@ -1,18 +1,47 @@
-var express = require('express'); //express es la funcion que tiene las funciones de express
-
+var express = require('express'); //Funcion que tiene las funciones de express
 var app = express();
 
+// parser application
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+
+var ingredients = [
+    {
+        "id":"23433",
+        "text": "Eggs"
+    },
+    {
+        "id":"23333",
+        "text": "Bacon" 
+    },
+    {
+        "id":"23465",
+        "text": "Bacalao" 
+    }
+
+];
+
 app.get('/',function(request ,response){
-    response.send('My Firts API');
+    response.send(ingredients);
 });
 
-app.get('/oliver',function(request, response){
-    response.send('Estas en la seccion de Oliver!');
+
+app.post('/',function(request, response){
+    var ingredient = request.body;
+    if(!ingredient || ingredient.text === ""){
+        response.status(500).send({
+            error: "Your ingredient must have text"
+        });
+
+    } else 
+    {
+        ingredients.push(ingredient);
+        response.status(200).send(ingredients);
+    }
 });
 
-app.get('/ol',function(request, response){
-    response.send('Estas en la seccion de Ol');
-});
 
 app.listen(3000, function(){
     console.log("Firts api running on port 3000!");
